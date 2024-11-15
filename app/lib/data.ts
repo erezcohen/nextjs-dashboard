@@ -5,7 +5,7 @@ import {
   InvoiceForm,
   InvoicesTable,
   LatestInvoiceRaw,
-  Revenue,
+  Revenue
 } from './definitions';
 import { formatCurrency } from './utils';
 
@@ -39,7 +39,7 @@ export async function fetchLatestInvoices() {
 
     const latestInvoices = data.rows.map((invoice) => ({
       ...invoice,
-      amount: formatCurrency(invoice.amount),
+      amount: formatCurrency(invoice.amount)
     }));
     return latestInvoices;
   } catch (error) {
@@ -63,7 +63,7 @@ export async function fetchCardData() {
     const data = await Promise.all([
       invoiceCountPromise,
       customerCountPromise,
-      invoiceStatusPromise,
+      invoiceStatusPromise
     ]);
 
     const numberOfInvoices = Number(data[0].rows[0].count ?? '0');
@@ -75,7 +75,7 @@ export async function fetchCardData() {
       numberOfCustomers,
       numberOfInvoices,
       totalPaidInvoices,
-      totalPendingInvoices,
+      totalPendingInvoices
     };
   } catch (error) {
     console.error('Database Error:', error);
@@ -86,7 +86,7 @@ export async function fetchCardData() {
 const ITEMS_PER_PAGE = 6;
 export async function fetchFilteredInvoices(
   query: string,
-  currentPage: number,
+  currentPage: number
 ) {
   const offset = (currentPage - 1) * ITEMS_PER_PAGE;
 
@@ -155,7 +155,7 @@ export async function fetchInvoiceById(id: string) {
     const invoice = data.rows.map((invoice) => ({
       ...invoice,
       // Convert amount from cents to dollars
-      amount: invoice.amount / 100,
+      amount: invoice.amount / 100
     }));
 
     return invoice[0];
@@ -206,7 +206,7 @@ export async function fetchFilteredCustomers(query: string) {
     const customers = data.rows.map((customer) => ({
       ...customer,
       total_pending: formatCurrency(customer.total_pending),
-      total_paid: formatCurrency(customer.total_paid),
+      total_paid: formatCurrency(customer.total_paid)
     }));
 
     return customers;

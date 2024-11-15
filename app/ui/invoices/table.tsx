@@ -6,7 +6,7 @@ import { fetchFilteredInvoices } from '@/app/lib/data';
 
 export default async function InvoicesTable({
   query,
-  currentPage,
+  currentPage
 }: {
   query: string;
   currentPage: number;
